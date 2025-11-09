@@ -2,7 +2,6 @@
 ## PARCIAL 4 - Lenguajes y Máquinas
 
 **Versión:** 2.0 (Refactorizada)  
-**Autor:** Javier España  
 **Fecha:** 9 de noviembre de 2025  
 
 ---
