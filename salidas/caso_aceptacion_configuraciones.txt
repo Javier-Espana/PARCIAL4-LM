@@ -1,0 +1,31 @@
+======================================================================
+SIMULACIÓN DE MÁQUINA DE TURING - CONFIGURACIONES
+======================================================================
+
+Archivo de especificación: especificaciones/caso_aceptacion.txt
+Cadena de entrada: '0011'
+Total de pasos: 14
+
+======================================================================
+SECUENCIA DE CONFIGURACIONES
+======================================================================
+
+Configuración inicial: q00011
+Paso 1: Xq1011
+Paso 2: X0q111
+Paso 3: Xq20Y1
+Paso 4: q2X0Y1
+Paso 5: Xq00Y1
+Paso 6: XXq1Y1
+Paso 7: XXYq11
+Paso 8: XXq2YY
+Paso 9: Xq2XYY
+Paso 10: XXq0YY
+Paso 11: XXYq3Y
+Paso 12: XXYYq3⊔
+Paso 13: XXYY⊔q_accept⊔
+Paso 14: ACEPTACIÓN - XXYY⊔q_accept⊔
+
+======================================================================
+FIN DE LA SIMULACIÓN
+======================================================================

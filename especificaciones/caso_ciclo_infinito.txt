@@ -1,0 +1,19 @@
+# Máquina de Turing - Caso de Ciclo Infinito
+# Esta MT causa un ciclo infinito moviendo la cabeza sin parar
+# Se mueve de izquierda a derecha infinitamente
+
+Q = q0,q1,q_accept,q_reject
+Σ = 0,1
+Γ = 0,1,⊔
+q0 = q0
+q_accept = q_accept
+q_reject = q_reject
+δ:
+q0,0 → q1,0,R
+q0,1 → q1,1,R
+q0,⊔ → q0,⊔,R
+q1,0 → q0,0,R
+q1,1 → q0,1,R
+q1,⊔ → q1,⊔,R
+#
+w = 01
