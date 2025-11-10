@@ -10,19 +10,19 @@ Total de pasos: 12
 SECUENCIA DE CONFIGURACIONES
 ======================================================================
 
-Configuración inicial: q00001
-Paso 1: Xq1001
-Paso 2: X0q101
-Paso 3: X00q11
-Paso 4: X0q20Y
-Paso 5: Xq200Y
-Paso 6: q2X00Y
-Paso 7: Xq000Y
-Paso 8: XXq10Y
-Paso 9: XX0q1Y
-Paso 10: XX0Yq1⊔
-Paso 11: XX0Y⊔q_reject⊔
-Paso 12: RECHAZO - XX0Y⊔q_reject⊔
+q00001
+Xq1001
+X0q101
+X00q11
+X0q20Y
+Xq200Y
+q2X00Y
+Xq000Y
+XXq10Y
+XX0q1Y
+XX0Yq1⊔
+XX0Y⊔q_reject⊔
+XX0Y⊔q_reject⊔
 
 ======================================================================
 FIN DE LA SIMULACIÓN
