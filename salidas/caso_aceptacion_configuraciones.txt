@@ -2,7 +2,7 @@
 SIMULACIÓN DE MÁQUINA DE TURING - CONFIGURACIONES
 ======================================================================
 
-Archivo de especificación: especificaciones/caso_aceptacion.txt
+Archivo de especificación: C:/Users/RJBar/OneDrive/Documents/GitHub/PARCIAL4-LM/especificaciones/caso_aceptacion.txt
 Cadena de entrada: '0011'
 Total de pasos: 14
 

@@ -1,6 +1,5 @@
 """
 Módulo de Parseo de Especificaciones
-====================================
 Contiene funciones para parsear archivos de especificación de Máquinas de Turing.
 """
 
@@ -9,7 +8,6 @@ from typing import Set, Dict, Tuple
 
 
 def parsear_estados(contenido: str) -> Set[str]:
-    """Extrae el conjunto de estados Q"""
     match = re.search(r'Q\s*=\s*([^\n]+)', contenido)
     if not match:
         raise ValueError("No se encontró la definición de Q (estados)")
@@ -21,7 +19,6 @@ def parsear_estados(contenido: str) -> Set[str]:
 
 
 def parsear_alfabeto_entrada(contenido: str) -> Set[str]:
-    """Extrae el alfabeto de entrada Σ"""
     match = re.search(r'Σ\s*=\s*([^\n]+)', contenido)
     if not match:
         raise ValueError("No se encontró la definición de Σ (alfabeto de entrada)")
@@ -33,7 +30,6 @@ def parsear_alfabeto_entrada(contenido: str) -> Set[str]:
 
 
 def parsear_alfabeto_cinta(contenido: str) -> Set[str]:
-    """Extrae el alfabeto de cinta Γ"""
     match = re.search(r'Γ\s*=\s*([^\n]+)', contenido)
     if not match:
         raise ValueError("No se encontró la definición de Γ (alfabeto de cinta)")
@@ -45,7 +41,6 @@ def parsear_alfabeto_cinta(contenido: str) -> Set[str]:
 
 
 def parsear_estado_inicial(contenido: str) -> str:
-    """Extrae el estado inicial q0"""
     match = re.search(r'q0\s*=\s*([^\n]+)', contenido)
     if not match:
         raise ValueError("No se encontró la definición de q0 (estado inicial)")
@@ -56,7 +51,6 @@ def parsear_estado_inicial(contenido: str) -> str:
 
 
 def parsear_estado_aceptacion(contenido: str) -> str:
-    """Extrae el estado de aceptación"""
     match = re.search(r'q_accept\s*=\s*([^\n]+)', contenido)
     if not match:
         raise ValueError("No se encontró la definición de q_accept")
@@ -67,7 +61,6 @@ def parsear_estado_aceptacion(contenido: str) -> str:
 
 
 def parsear_estado_rechazo(contenido: str) -> str:
-    """Extrae el estado de rechazo"""
     match = re.search(r'q_reject\s*=\s*([^\n]+)', contenido)
     if not match:
         raise ValueError("No se encontró la definición de q_reject")
@@ -78,11 +71,7 @@ def parsear_estado_rechazo(contenido: str) -> str:
 
 
 def parsear_funcion_transicion(contenido: str) -> Dict[Tuple[str, str], Tuple[str, str, str]]:
-    """
-    Extrae la función de transición δ.
-    Formato: estado_actual,símbolo_leído → nuevo_estado,símbolo_escrito,dirección
-    """
-    # Buscar la sección de transiciones
+    """Extrae la función de transición δ"""
     match = re.search(r'δ:\s*\n(.*?)(?:\n#|\nw\s*=)', contenido, re.DOTALL)
     if not match:
         raise ValueError("No se encontró la definición de δ (función de transición)")
@@ -94,7 +83,6 @@ def parsear_funcion_transicion(contenido: str) -> Dict[Tuple[str, str], Tuple[st
     
     delta = {}
     for linea in lineas:
-        # Parsear formato: q0,0 → q1,X,R
         match_trans = re.match(r'([^,]+),([^→]+)\s*→\s*([^,]+),([^,]+),(.+)', linea)
         if not match_trans:
             print(f"    Advertencia: Formato inválido en transición: {linea}")
@@ -106,12 +94,10 @@ def parsear_funcion_transicion(contenido: str) -> Dict[Tuple[str, str], Tuple[st
         simbolo_escrito = match_trans.group(4).strip()
         direccion = match_trans.group(5).strip()
         
-        # Validar dirección
         if direccion not in ['L', 'R', 'S']:
             print(f"    Advertencia: Dirección inválida '{direccion}' en: {linea}")
             continue
         
-        # Almacenar transición
         clave = (estado_actual, simbolo_leido)
         delta[clave] = (nuevo_estado, simbolo_escrito, direccion)
         print(f"    δ({estado_actual}, {simbolo_leido}) = ({nuevo_estado}, {simbolo_escrito}, {direccion})")
@@ -120,7 +106,6 @@ def parsear_funcion_transicion(contenido: str) -> Dict[Tuple[str, str], Tuple[st
 
 
 def parsear_cadena_entrada(contenido: str) -> str:
-    """Extrae la cadena de entrada w"""
     match = re.search(r'w\s*=\s*([^\n]*)', contenido)
     if not match:
         raise ValueError("No se encontró la definición de w (cadena de entrada)")

@@ -1,6 +1,5 @@
 """
 Módulo Principal de Máquina de Turing
-=====================================
 Contiene la clase principal MaquinaTuring que integra todos los módulos.
 """
 
@@ -20,14 +19,9 @@ from .simulador import SimuladorMT
 
 
 class MaquinaTuring:
-    """
-    Clase que representa una Máquina de Turing Determinista.
-    Implementa todos los componentes formales de una MT: Q, Σ, Γ, δ, q0, q_accept, q_reject
-    """
+    """Clase que representa una Máquina de Turing Determinista"""
     
     def __init__(self):
-        """Inicializa todos los componentes de la Máquina de Turing"""
-        # Componentes formales de la MT
         self.Q: Set[str] = set()
         self.Sigma: Set[str] = set()
         self.Gamma: Set[str] = set()
@@ -35,24 +29,12 @@ class MaquinaTuring:
         self.q_accept: str = ""
         self.q_reject: str = ""
         self.delta: Dict[Tuple[str, str], Tuple[str, str, str]] = {}
-        
-        # Metadatos
         self.cadena_entrada: str = ""
         self.archivo_origen: str = ""
-        
-        # Simulador
         self.simulador: SimuladorMT = None
     
     def cargar_archivo(self, ruta: str) -> bool:
-        """
-        Carga y parsea el archivo de especificación de la MT.
-        
-        Args:
-            ruta: Ruta al archivo de especificación
-            
-        Returns:
-            True si la carga fue exitosa, False en caso contrario
-        """
+        """Carga y parsea el archivo de especificación de la MT"""
         try:
             with open(ruta, 'r', encoding='utf-8') as archivo:
                 contenido = archivo.read()
@@ -60,7 +42,6 @@ class MaquinaTuring:
             self.archivo_origen = ruta
             print(f"Cargando especificación desde: {ruta}")
             
-            # Parsear componentes de la MT
             self.Q = parsear_estados(contenido)
             self.Sigma = parsear_alfabeto_entrada(contenido)
             self.Gamma = parsear_alfabeto_cinta(contenido)
@@ -81,12 +62,7 @@ class MaquinaTuring:
             return False
     
     def validar_maquina(self) -> bool:
-        """
-        Valida que todos los componentes de la MT sean correctos y consistentes.
-        
-        Returns:
-            True si la validación es exitosa, False en caso contrario
-        """
+        """Valida que todos los componentes de la MT sean correctos y consistentes"""
         print("\nValidando especificación de la Máquina de Turing...")
         
         valido, errores = validar_maquina(
@@ -105,15 +81,7 @@ class MaquinaTuring:
             return True
     
     def simular(self, pasos_max: int = 1000) -> str:
-        """
-        Ejecuta la simulación de la Máquina de Turing.
-        
-        Args:
-            pasos_max: Número máximo de pasos antes de detectar ciclo infinito
-            
-        Returns:
-            String indicando el resultado: 'ACEPTADA', 'RECHAZADA', o 'CICLO_INFINITO'
-        """
+        """Ejecuta la simulación de la Máquina de Turing"""
         self.simulador = SimuladorMT(
             self.delta,
             self.q0,
@@ -125,19 +93,13 @@ class MaquinaTuring:
         return self.simulador.simular(pasos_max)
     
     def guardar_resultado(self, ruta_salida: str):
-        """
-        Guarda las configuraciones en un archivo de texto.
-        
-        Args:
-            ruta_salida: Ruta donde guardar el archivo de salida
-        """
+        """Guarda las configuraciones en un archivo de texto"""
         if not self.simulador:
             print("Error: No se ha ejecutado ninguna simulación")
             return
         
         try:
             with open(ruta_salida, 'w', encoding='utf-8') as archivo:
-                # Encabezado
                 archivo.write("=" * 70 + "\n")
                 archivo.write("SIMULACIÓN DE MÁQUINA DE TURING - CONFIGURACIONES\n")
                 archivo.write("=" * 70 + "\n\n")
@@ -150,7 +112,6 @@ class MaquinaTuring:
                 archivo.write("SECUENCIA DE CONFIGURACIONES\n")
                 archivo.write("=" * 70 + "\n\n")
                 
-                # Escribir todas las configuraciones
                 for config in self.simulador.configuraciones:
                     archivo.write(config + "\n")
                 
